@@ -1,4 +1,4 @@
-enum Responses {
+export enum Responses {
   REG = 'reg',
   CREATE_ROOM = 'create_room',
   ADD_USER_TO_ROOM = 'add_user_to_room',
@@ -7,7 +7,7 @@ enum Responses {
   RANDOM_ATTACK = 'randomAttack',
 }
 
-enum Requests {
+export enum Requests {
   REG = 'reg',
   UPDATE_WINNERS = 'update_winners',
   CREATE_GAME = 'create_game',
@@ -46,13 +46,13 @@ type Position = {
   y: number;
 };
 
-type User = {
+export type User = {
   name: string;
   password: string;
   index: number;
 };
 
-type RegistrationResponseData = Omit<User, 'index'>;
+export type RegistrationResponseData = Omit<User, 'index'>;
 type AddToRoomResponseData = {
   indexRoom: number;
 };
@@ -78,13 +78,13 @@ export type WSResponseData =
   | AttackResponseData
   | RandomAttackResponseData;
 
-type RegistrationRequestData = {
+export type RegistrationRequestData = {
   name: string;
   index: number;
   error: boolean;
   errorText: string;
 };
-type Winner = {
+export type Winner = {
   name: string;
   wins: number;
 };
@@ -93,7 +93,7 @@ type CreateGameRequestData = {
   idGame: number;
   idPlayer: number;
 };
-type Room = {
+export type Room = {
   roomId: number;
   roomUsers: Omit<User, 'password'>[];
 };
