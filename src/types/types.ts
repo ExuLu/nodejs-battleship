@@ -45,3 +45,37 @@ type Position = {
   x: number;
   y: number;
 };
+
+type User = {
+  name: string;
+  password: string;
+  userId: number;
+};
+
+type RegistrationResponseData = Omit<User, 'userId'>;
+type AddToRoomResponseData = {
+  indexRoom: number;
+};
+type AddShipsResponseData = {
+  gameId: number;
+  ships: Ship[];
+  indexPlayer: number;
+};
+type AttackResponseData = {
+  gameId: number;
+  x: number;
+  y: number;
+  indexPlayer: number;
+};
+type RandomAttackResponseData = {
+  gameId: number;
+  indexPlayer: number;
+};
+type WSResponseData =
+  | RegistrationResponseData
+  | AddShipsResponseData
+  | AddToRoomResponseData
+  | AttackResponseData
+  | RandomAttackResponseData;
+
+  
