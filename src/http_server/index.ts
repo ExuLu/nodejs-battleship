@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as http from 'http';
 import { WebSocket } from 'ws';
+import { stringify } from '../helpers/stringify';
 
 export const httpServer = http.createServer(function (req, res) {
   const __dirname = path.resolve(path.dirname(''));
@@ -24,7 +25,10 @@ wss.on('connection', (ws) => {
   console.log('New client connected');
 
   ws.on('message', (message) => {
-    console.log(message);
+    const req = stringify(message);
+    const { type, data } = req;
+    const properData = stringify(data);
+    console.log(`Command type: ${type}. Data:`, properData);
   });
 
   ws.on('close', () => {
