@@ -113,3 +113,18 @@ type TurnRequest = {
 type FinishRequest = {
   winPlayer: number;
 };
+export type WSRequestData =
+  | UpdateWinnersRequestData
+  | CreateGameRequestData
+  | RegistrationRequestData
+  | UpdateRoomRequestData
+  | StartGameRequestData
+  | AttackRequest
+  | TurnRequest
+  | FinishRequest;
+
+export type WSCommands = {
+  type: Responses | Requests;
+  data: WSRequestData | WSResponseData;
+  id: 0;
+};
