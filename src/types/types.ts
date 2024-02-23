@@ -49,10 +49,10 @@ type Position = {
 type User = {
   name: string;
   password: string;
-  userId: number;
+  index: number;
 };
 
-type RegistrationResponseData = Omit<User, 'userId'>;
+type RegistrationResponseData = Omit<User, 'index'>;
 type AddToRoomResponseData = {
   indexRoom: number;
 };
@@ -71,11 +71,45 @@ type RandomAttackResponseData = {
   gameId: number;
   indexPlayer: number;
 };
-type WSResponseData =
+export type WSResponseData =
   | RegistrationResponseData
   | AddShipsResponseData
   | AddToRoomResponseData
   | AttackResponseData
   | RandomAttackResponseData;
 
-  
+type RegistrationRequestData = {
+  name: string;
+  index: number;
+  error: boolean;
+  errorText: string;
+};
+type Winner = {
+  name: string;
+  wins: number;
+};
+type UpdateWinnersRequestData = Winner[];
+type CreateGameRequestData = {
+  idGame: number;
+  idPlayer: number;
+};
+type Room = {
+  roomId: number;
+  roomUsers: Omit<User, 'password'>[];
+};
+type UpdateRoomRequestData = Room[];
+type StartGameRequestData = {
+  ships: Ship[];
+  currentPlayerIndex: number;
+};
+type AttackRequest = {
+  position: Position;
+  currentPlayer: number;
+  status: AttacksResult;
+};
+type TurnRequest = {
+  currentPlayer: number;
+};
+type FinishRequest = {
+  winPlayer: number;
+};
