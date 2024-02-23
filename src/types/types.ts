@@ -1,3 +1,5 @@
+import { WebSocket } from 'ws';
+
 export enum Responses {
   REG = 'reg',
   CREATE_ROOM = 'create_room',
@@ -28,6 +30,11 @@ export type Game = {
   gameId: number;
   players: Player[];
 };
+
+export interface BattleshipWS extends WebSocket {
+  name: string;
+  id: number;
+}
 
 type Player = {
   indexPlayer: number;

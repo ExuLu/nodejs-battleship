@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as http from 'http';
 import { WebSocket } from 'ws';
 import { parse } from '../helpers/parse';
-import { WSCommands, WSResponseData } from '../types/types';
+import { BattleshipWS, WSCommands, WSResponseData } from '../types/types';
 import { handler } from '../handlers/handlers';
 
 export const httpServer = http.createServer(function (req, res) {
@@ -23,7 +23,7 @@ export const httpServer = http.createServer(function (req, res) {
 
 export const wss = new WebSocket.Server({ port: 3000 });
 
-wss.on('connection', (ws) => {
+wss.on('connection', (ws: BattleshipWS) => {
   console.log('New client connected');
 
   ws.on('message', (message) => {

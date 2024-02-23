@@ -1,13 +1,14 @@
 import { users } from '../database/database';
 import { stringify } from '../helpers/stringify';
 import {
+  BattleshipWS,
   RegistrationRequestData,
   RegistrationResponseData,
   Requests,
   WSCommands,
 } from '../types/types';
 
-export function registration(data: RegistrationResponseData) {
+export function registration(data: RegistrationResponseData, ws: BattleshipWS) {
   const userExist = users.find((user) => user.name === data.name);
   let reqData: RegistrationRequestData;
   if (userExist) {
@@ -26,6 +27,8 @@ export function registration(data: RegistrationResponseData) {
       index: users.length,
       error: false,
     };
+    ws.name = data.name;
+    ws.id = reqData.index;
   }
   const req: WSCommands = {
     type: Requests.REG,

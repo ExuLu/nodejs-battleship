@@ -1,6 +1,6 @@
 import { games, rooms, users } from '../database/database';
 import { stringify } from '../helpers/stringify';
-import { Requests, Room, WSCommands } from '../types/types';
+import { BattleshipWS, Requests, Room, WSCommands } from '../types/types';
 
 export function updateRoom() {
   const req: WSCommands = {
@@ -12,22 +12,28 @@ export function updateRoom() {
   return reqString;
 }
 
-export function createRoom(data: any) {
+export function createRoom(data: any, ws: BattleshipWS) {
   const newRoom: Room = {
     roomId: rooms.length,
-    roomUsers: users,
+    roomUsers: [{ index: +ws.id, name: ws.name }],
   };
   rooms.push(newRoom);
 }
 
-export function addUserToRoom(data: any) {
+export function addUserToRoom(data: any, ws: BattleshipWS) {
   const room = rooms[data.indexRoom];
+  if (room.roomUsers.length < 2) {
+    room.roomUsers.push({
+      index: +ws.id,
+      name: ws.name,
+    });
+  }
   if (room.roomUsers.length === 2) {
     const req: WSCommands = {
       type: Requests.CREATE_GAME,
       data: {
         idGame: games.length,
-        idPlayer: 0,
+        idPlayer: +ws.id,
       },
       id: 0,
     };
