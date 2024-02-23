@@ -1,9 +1,4 @@
-import { RawData } from 'ws';
-import { WSRequestData, WSResponseData } from '../types/types';
-
-export function stringify(
-  str: RawData | string | WSRequestData | WSResponseData
-) {
-  const data = JSON.parse(str.toString());
-  return data;
+import { WSCommands } from '../types/types';
+export function stringify(message: WSCommands) {
+  return JSON.stringify({ ...message, data: JSON.stringify(message.data) });
 }

@@ -53,21 +53,21 @@ export type User = {
 };
 
 export type RegistrationResponseData = Omit<User, 'index'>;
-type AddToRoomResponseData = {
+export type AddToRoomResponseData = {
   indexRoom: number;
 };
-type AddShipsResponseData = {
+export type AddShipsResponseData = {
   gameId: number;
   ships: Ship[];
   indexPlayer: number;
 };
-type AttackResponseData = {
+export type AttackResponseData = {
   gameId: number;
   x: number;
   y: number;
   indexPlayer: number;
 };
-type RandomAttackResponseData = {
+export type RandomAttackResponseData = {
   gameId: number;
   indexPlayer: number;
 };
@@ -82,7 +82,7 @@ export type RegistrationRequestData = {
   name: string;
   index: number;
   error: boolean;
-  errorText: string;
+  errorText?: string;
 };
 export type Winner = {
   name: string;
@@ -97,7 +97,7 @@ export type Room = {
   roomId: number;
   roomUsers: Omit<User, 'password'>[];
 };
-type UpdateRoomRequestData = Room[];
+export type UpdateRoomRequestData = Room[];
 type StartGameRequestData = {
   ships: Ship[];
   currentPlayerIndex: number;
@@ -125,6 +125,6 @@ export type WSRequestData =
 
 export type WSCommands = {
   type: Responses | Requests;
-  data: WSRequestData | WSResponseData;
+  data: WSRequestData | WSResponseData | '';
   id: 0;
 };
