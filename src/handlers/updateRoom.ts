@@ -28,14 +28,4 @@ export function addUserToRoom(data: any, ws: BattleshipWS) {
       name: ws.name,
     });
   }
-  if (room.roomUsers.length === 2) {
-    const req: WSCommands = {
-      type: Requests.CREATE_GAME,
-      data: {
-        idGame: games.length,
-        idPlayer: +ws.id,
-      },
-      id: 0,
-    };
-  }
 }

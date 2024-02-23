@@ -3,8 +3,13 @@ import { registration } from './registration';
 import { WebSocket } from 'ws';
 import { addUserToRoom, createRoom, updateRoom } from './updateRoom';
 import { wss } from '../http_server';
+import { createGame } from './createGame';
 
-export function handler(type: Responses | Requests, data: any, ws: BattleshipWS) {
+export function handler(
+  type: Responses | Requests,
+  data: any,
+  ws: BattleshipWS
+) {
   if (type === 'reg') {
     ws.send(registration(data, ws));
     wss.clients.forEach((client) => {
@@ -17,7 +22,10 @@ export function handler(type: Responses | Requests, data: any, ws: BattleshipWS)
     wss.clients.forEach((client) => client.send(updateRoom()));
   }
   if (type === 'add_user_to_room') {
-      addUserToRoom(data, ws);
-      wss.clients.forEach((client) => client.send(updateRoom()));
+    addUserToRoom(data, ws);
+    wss.clients.forEach((client) => {
+      client.send(updateRoom());
+      client.send(createGame(ws));
+    });
   }
 }
