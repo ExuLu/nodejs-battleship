@@ -49,4 +49,8 @@ export function handler(
       }
     }
   }
+
+  if (type === 'attack') {
+    
+  }
 }
