@@ -36,7 +36,7 @@ export interface BattleshipWS extends WebSocket {
   id: number;
 }
 
-type Player = {
+export type Player = {
   indexPlayer: number;
   ships?: Ship[];
 };
@@ -105,7 +105,7 @@ export type Room = {
   roomUsers: Omit<User, 'password'>[];
 };
 export type UpdateRoomRequestData = Room[];
-type StartGameRequestData = {
+export type StartGameRequestData = {
   ships: Ship[];
   currentPlayerIndex: number;
 };
