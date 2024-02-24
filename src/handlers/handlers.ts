@@ -4,6 +4,7 @@ import { WebSocket } from 'ws';
 import { addUserToRoom, createRoom, updateRoom } from './updateRoom';
 import { wss } from '../http_server';
 import { createGame } from './createGame';
+import { updateWinners } from './updateWinners';
 
 export function handler(
   type: Responses | Requests,
@@ -14,7 +15,7 @@ export function handler(
     ws.send(registration(data, ws));
     wss.clients.forEach((client) => {
       client.send(updateRoom());
-      client.send(updateRoom());
+      client.send(updateWinners());
     });
   }
   if (type === 'create_room') {
